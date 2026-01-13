@@ -162,9 +162,16 @@
     });
     
   </script>
-  <script>
-fetch("/api/visit", { method: "POST" });
+<script>
+  const KEY = "last_logged_day";
+  const today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+
+  if (localStorage.getItem(KEY) !== today) {
+    localStorage.setItem(KEY, today);
+    fetch("/api/visit", { method: "POST" }).catch(()=>{});
+  }
 </script>
+
 
 </body>
 </html>
